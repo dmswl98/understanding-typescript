@@ -21,6 +21,9 @@ let name: string;
 name = "Max";
 ```
 
+<br/>
+<br/>
+
 ## 함수의 매개변수 타입 설정
 
 ```typescript
@@ -29,6 +32,9 @@ function add(n1: number, n2: number) {
   return n1 + n2;
 }
 ```
+
+<br/>
+<br/>
 
 ## 타입 추론
 
@@ -58,6 +64,9 @@ function add(n1: number, n2: number) {
   // number 타입으로 추론되지 않고 5 타입으로 추론된다.
   const num = 5;
   ```
+
+  <br/>
+  <br/>
 
 ## 객체 타입
 
@@ -96,6 +105,9 @@ const product: {
 console.log(product.tags);
 ```
 
+<br/>
+<br/>
+
 ## 배열 타입
 
 - string[] : 문자열로 이루어진 배열
@@ -114,6 +126,9 @@ for (const hobby of hobbies) {
 let box: any[];
 box = ["ball", 3, true];
 ```
+
+<br/>
+<br/>
 
 ## 튜플 타입
 
@@ -145,6 +160,9 @@ console.log(market.fruits); // [2000, 'apple', 'banana']
 // 에러 발생 : 첫 번째 요소는 number 타입이여야 한다.
 // market.fruits[0] = "banana";
 ```
+
+<br/>
+<br/>
 
 ## enum 타입
 
@@ -207,6 +225,9 @@ if (documents.role === Role.READ_ONLY) {
 // }
 ```
 
+<br/>
+<br/>
+
 ## union 타입
 
 - 사용 이유
@@ -242,6 +263,9 @@ if (documents.role === Role.READ_ONLY) {
   const combinedAges2 = combine2(30, 10); // 40
   const combinedNames2 = combine2("Max", "i"); // Maxi
   ```
+
+<br/>
+<br/>
 
 ## 타입 별칭(사용자 정의 타입)
 
@@ -309,6 +333,9 @@ function isOlder(user: User, checkAge: number) {
 }
 ```
 
+<br/>
+<br/>
+
 ## 리터럴 타입
 
 - 할당한 값을 타입으로 사용할 수 있다.
@@ -339,6 +366,9 @@ const combinedNames3 = combine3("Max", "i", "as-text");
 console.log(combinedAges3); // 40
 console.log(combinedNames3); // Maxi
 ```
+
+<br/>
+<br/>
 
 ## 함수 타입
 
@@ -417,6 +447,9 @@ addHandler(10, 20, (result) => {
 });
 ```
 
+<br/>
+<br/>
+
 ## unknown 타입
 
 - 어떤 타입의 값이 저장될지 모를 때 사용한다.
@@ -441,6 +474,9 @@ if (typeof value === "string") {
   nameValue = value;
 }
 ```
+
+<br/>
+<br/>
 
 ## never 타입
 
