@@ -160,11 +160,16 @@ class AccountingDepartment extends Department2 {
   }
 
   // private 생성자 함수
+  // 1) 생성자 앞에 private 키워드를 붙여 private 생성자로 변경할 수 있다.
+  // 2) new AccountingDepartment를 여러 번 수동으로 호출하지 않기 위해 private 생성자 함수로 변경하는 것이다.
+  // 3) private 생성자 함수로 변경하게 되면 new AccountingDepartment를 클래스 바깥에서 선언할 수 없다.
+  // 4) 클래스 내부에서만 해당 클래스의 인스턴스를 생성할 수 있다. === 클래스 내부에서는 private 생성자를 호출할 수 있다.
   private constructor(id: string, private reports: string[]) {
     super(id, "Account");
     this.lastReports = reports[0];
   }
 
+  // 정적 메서드
   static getInstance() {
     if (AccountingDepartment.instance) {
       return this.instance;
@@ -198,11 +203,13 @@ class AccountingDepartment extends Department2 {
 // const account = new AccountingDepartment("d3", ["get"]);
 
 // 싱글톤 : 특정 클래스의 인스턴스를 하나만 갖도록 한다.
-// 1) static 메서드나 속성을 사용할 수 없다.
-// 2) 클래스 기반으로 여러 객체를 만들 수 없지만 하나의 객체를 보장한다.
-// *** 해당 생성자 함수 앞에 private 키워드를 붙여 private 생성자 함수로 바꾸어야 한다.
+// 1) private 키워드를 통해 private 생성자 함수를 만들면 싱글톤을 구현할 수 있다.
+// 2) new 키워드를 통해 인스턴스를 생성하지 못하도록 제한한다.
+// 3) static 메서드를 통해 해당 클래스의 오직 한 번만 인스턴스를 생성할 수 있다.
 const account = AccountingDepartment.getInstance();
+const account2 = AccountingDepartment.getInstance();
 console.log(account);
+console.log(account, account2); // ** 동일한 객체를 리턴한다.
 
 account.addReport("Something went wrong...");
 account.printReports(); // ['Something went wrong...']
