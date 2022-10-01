@@ -206,9 +206,9 @@ engineering.describe(); // IT department d2
 console.log(engineering); // ITDepartment { id: 'd2', name: 'IT', admins: ['tom'] }
 ```
 
-- 구현부는 작성하지 않은 채로 남겨둔 메서드를 말한다.
+- 추상 메서드는 **구현부는 작성하지 않은 채로 남겨둔 메서드를 말한다.** 메서드 명 앞에는 `abstract` 키워드를 작성해야 한다.
 - 자식 클래스에도 해당 추상 메서드를 반드시 구현하도록 강요하기 위해 사용한다.
-- 클래스 명 앞에도 `abstract` 키워드를 작성해야 한다.
+- 추상 메서드가 포함된 클래스는 클래스 명 앞에 `abstract` 키워드를 작성해야 한다.
 - 추상 클래스는 인스턴스 생성이 불가하다.
 
 <br/>
@@ -274,16 +274,25 @@ account.printReports(); // ['get', 'Something went wrong...', 'Year Report']
 ```
 
 - getter: 메서드 명만 작성하여 실행한다.
+  - `account.mostRecentReport()`가 아닌
+  - `account.mostRecentReport`로 작성해야 한다.
 - setter: 등호를 이용해 전달할 값을 작성한다.
+  - `account.mostRecentReport("Year Report");`가 아닌
+  - `account.mostRecentReport = "Year Report";`로 작성해야 한다.
 
 <br/>
 
 ### 6. 싱글톤 & private 생성자 함수
 
-- 특정 클래스의 인스턴스를 하나만 갖도록 한다.
-- static 메서드나 속성을 사용할 수 없다.
-- 클래스 기반으로 여러 객체를 만들 수 없지만 하나의 객체를 보장한다.
-- 해당 생성자 함수 앞에 private 키워드를 붙여 private 생성자 함수로 바꾸어야 한다.
+- 싱글톤 : 특정 클래스의 인스턴스를 하나만 갖도록 한다.
+  1. `private` 키워드를 통해 private 생성자 함수를 만들면 싱글톤을 구현할 수 있다.
+  2. `new` 키워드를 통해 인스턴스를 생성하지 못하도록 제한한다.
+  3. static 메서드를 통해 해당 클래스의 오직 한 번만 인스턴스를 생성할 수 있다.
+- private 생성자 함수
+  1. 생성자 앞에 `private` 키워드를 붙여 private 생성자로 변경할 수 있다.
+  2. `new AccountingDepartment`를 여러 번 수동으로 호출하지 않기 위해 private 생성자 함수로 변경하는 것이다.
+  3. private 생성자 함수로 변경하게 되면 `new AccountingDepartment`를 클래스 바깥에서 선언할 수 없다.
+  4. **클래스 내부에서만 해당 클래스의 인스턴스를 생성할 수 있다.** === **클래스 내부에서는 private 생성자를 호출할 수 있다.**
 
 ```typescript
 class AccountingDepartment extends Department2 {
@@ -306,19 +315,23 @@ class AccountingDepartment extends Department2 {
   }
 }
 
+// private 생성자 함수인 경우 클래스 외부에서 new 연산자를 이용해 인스턴스를 생성할 수 없다.
+// const account = new AccountingDepartment("d3", ["get"]); // error
+
 // account1과 account2는 같은 객체(인스턴스)를 갖는다.
 const account1 = AccountingDepartment.getInstance();
 const account2 = AccountingDepartment.getInstance();
+console.log(account1, account2); // 동일한 객체를 리턴한다.
 ```
 
 ## 인터페이스
 
 - 인터페이스명의 첫 글자는 항상 대문자로 작성한다.
 - 인터페이스는 주로 '객체의 구조'를 설명하기 위해서 사용된다.(함수의 구조를 정의할 수도 있다.)
-- 인터페이스 내에는 구현 코드가 아닌 기능의 구조를 작성한다.
+- 인터페이스 내에는 구체적인 값(구현 코드)이 아닌 기능의 구조를 작성한다.
 - 사용자 정의 타입(type)보다 interface를 자주 사용하는 이유는 클래스가 인터페이스를 이행해야 하는 약속처럼 사용될 수 있기 때문이다.
 - 즉, user 객체는 Person 인터페이스를 가지므로 인터페이스 내 정의된 name, age, greet(필드 및 메서드)를 반드시 모두 포함해야 한다는 의미이다.
-- 인터페이스와 달리 추상 클래스는 추상 메서드 이외에 구체적으로 구현된 메서드를 포함할 수 있다.
+- 인터페이스는 객체나 함수 타입을 작성할 수 있지만 유니온 타입과 같은 임의의 타입은 작성할 수 없다.
 - 인터페이스는 개발 및 컴파일 도중에만 사용할 수 있는 타입스크립트 전용 기능이므로 인터페이스는 컴파일된 자바스크립트 코드에서 볼 수 없다.
 
 ```typescript
@@ -329,8 +342,16 @@ interface Greetable {
   greet(phrase: string): void;
 }
 
+// type으로 변환한 경우, 기존에 작성한 interface와 같은 동작을 보인다.
+// type Greetable = {
+//   name: string;
+//   age: number;
+
+//   greet(phrase: string): void;
+// };
+
+// 클래스 Person1은 인터페이스인 Greetable에 작성된 모든 필드 및 메서드를 포함해야 한다.
 class Person1 implements Greetable {
-  // 인터페이스 Greetable의 모든 속성과 메서드를 구현해야 한다.
   name: string;
   age = 30;
 
@@ -353,6 +374,7 @@ user1 = {
 };
 
 user1.greet("Hi there - I am"); // Hi there - I am Max
+console.log(user1); // {name: 'Max', age: 30, greet: ƒ}
 
 // Person 객체는 Greetable 인터페이스에 기반한 것이므로 user2 객체의 타입은 Greetable와 Person 모두 가능하다.
 let user2: Greetable = new Person1("Tom");
@@ -364,10 +386,10 @@ console.log(user1.age); // 30
 
 ### 1. readonly 키워드
 
-- 읽기 전용 속성은 수정할 수 없다.
+- readonly 키워드가 작성된 속성(읽기 전용 속성)은 수정할 수 없다.
 
 ```typescript
-// 1) 인터페이스의 경우
+// 1) interface의 경우 : 아래 코드와 같이 객체의 구조를 설계하고 싶다면 type보다 interface를 사용하는 것이 권장된다.
 interface Greetable1 {
   readonly name: string;
   age: number;
@@ -379,14 +401,34 @@ type Greetable2 = {
   age: number;
 };
 
-let user3: Greetable1 = {
+// 클래스의 readonly 속성 : 클래스 내부의 readonly 키워드를 수동으로 작성하지 않아도 된다.
+class Person2 implements Greetable1 {
+  name: string;
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + " " + this.name);
+  }
+}
+
+let user3: Greetable1;
+user3 = new Person2("Eric");
+// 에러 발생 : 클래스 내부에 readonly 키워드를 추가하지 않았음에도 클래스는 해당 속성이 읽기 전용임을 추론할 수 있다.
+// user3.name = "Matti";
+
+// 객체의 readonly 속성
+let user4: Greetable1 = {
   name: "tom",
   age: 20,
 };
 
-console.log(user3);
+console.log(user4);
 // 에러 발생: 읽기 전용 속성은 변경할 수 없다.
-// user3.name = 'Eric';
+// user4.name = 'Eric';
 ```
 
 <br/>
@@ -405,8 +447,8 @@ interface Greet extends Named {
   greet(phrase: string): void;
 }
 
-// 클래스 Person2는 name과 greet를 작성해야 한다.
-class Person2 implements Greet {
+// 클래스 Person3는 name과 greet를 작성해야 한다.
+class Person3 implements Greet {
   name: string;
   age = 30;
 
@@ -419,8 +461,8 @@ class Person2 implements Greet {
   }
 }
 
-const user4 = new Person2("Sam");
-user4.greet("hi,"); // hi, Sam
+const user5 = new Person3("Sam");
+user5.greet("hi,"); // hi, Sam
 ```
 
 <br/>
@@ -428,6 +470,7 @@ user4.greet("hi,"); // hi, Sam
 ### 3. 함수의 구조 정의
 
 - type을 이용하는 것이 보편적이다.
+- 하지만 interface를 이용해 함수의 구조를 정의할 수도 있다.
 
 ```typescript
 // 1) type 이용한 방법
@@ -438,9 +481,9 @@ add = (n1: number, n2: number) => {
   return n1 + n2;
 };
 
-// 2) interface 이용한 방법: 익명 함수를 작성한다.
+// 2) interface 이용한 방법: 함수도 객체이기 때문에 interface를 이용해 익명 함수를 작성하여 함수의 구조를 정의할 수 있다.
 interface SubFn {
-  (a: number, b: number): number;
+  (a: number, b: number): number; // 익명 함수(메서드)
 }
 
 let sub: SubFn;
@@ -457,7 +500,6 @@ sub = (n1: number, n2: number) => {
 - 속성명 또는 메서드명 뒤에 물음표를 붙여 옵션을 설정할 수 있다.
 
 ```typescript
-// Car 클래스에서 인터페이스 Wheel의 옵션을 설정한 속성을 작성하지 않아도 에러가 발생하지 않는다.
 interface Wheel {
   readonly name?: string;
   model?: string;
@@ -465,6 +507,8 @@ interface Wheel {
   printInfo?(): void;
 }
 
+// Car 클래스에서 인터페이스 Wheel의 옵션을 설정한 속성을 작성하지 않아도 에러가 발생하지 않는다.
+// 즉, Car 클래스에서 model 속성(옵셔널 속성)을 작성하지 않았음에도 에러가 발생하지 않는다.
 class Car implements Wheel {
   name?: string;
 
@@ -489,7 +533,12 @@ newCar2.printInfo(); // No Name
 
 <br/>
 
-### 5. 인터페이스 vs. 클래스
+### 5. interface vs. class
 
-- 인터페이스 : 인스턴스화할 수 없으며 컴파일되지 않는다.(인터페이스는 타입스크립트 기능이기 때문이다.)
-- 클래스 : 인스턴스화할 수 있으며 컴파일된다.
+- interface : 인스턴스화할 수 없으며 컴파일되지 않는다.(인터페이스는 타입스크립트 기능이기 때문이다.)
+- class : 인스턴스화할 수 있으며 컴파일된다.
+
+### 6. interface vs. abstract
+
+- interface : 인터페이스 내부에는 반드시 구현 코드가 아닌 구조(선언부, 설계)만 작성해야 한다.
+- abstract : abstract 내부에는 구현 코드가 작성된 필드나 메서드를 포함할 수 있다. 즉, 추상 클래스는 추상 메서드 이외에 구체적으로 구현된 메서드를 포함할 수 있다.
