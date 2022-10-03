@@ -6,6 +6,8 @@
 - 한 가지 타입보다 여러 가지 타입에서 동작하는 함수를 생성하고자 할 때 사용한다.
 - 함수를 정의할 때 타입을 고정적으로 설정하지 않고 함수를 호출할 때 동적으로 타입을 설정할 수 있도록 한다.
 
+<br/>
+
 ### 배열 타입
 
 - `Array<T>`와 같은 형식을 제네릭 타입이라고 한다. 이는 Array 타입과 T라는 타입과 연결된 타입을 말한다.
@@ -26,6 +28,8 @@ names3[0].split(" "); // 이 배열의 요소가 문자열 타입임을 추론�
 const names4: Array<string | number> = [];
 ```
 
+<br/>
+
 ### 프로미스 타입
 
 - 위 배열 타입(Array)과 같이 프로미스 타입(Promise)도 다른 타입과 함께 작성될 수 있다.
@@ -45,6 +49,9 @@ promise.then((data) => {
   data.split(" ");
 });
 ```
+
+<br/>
+<br/>
 
 ## 2. Generic Function
 
@@ -82,6 +89,9 @@ const mergedObj1 = merge1({ name: "Max" }, { age: 33 }); // { name: 'Max', age: 
 console.log(mergedObj1.age); // 33
 ```
 
+<br/>
+<br/>
+
 ## 3. Working with Constraints
 
 ### **제약 조건**의 필요성
@@ -92,6 +102,8 @@ console.log(mergedObj1.age); // 33
 ```typescript
 const mergedObj2 = merge1({ name: "Max" }, 33); // { name: 'Max' }
 ```
+
+<br/>
 
 ### 제약 조건 설정
 
@@ -109,6 +121,8 @@ function merge2<T extends object, U extends object>(objA: T, objB: U) {
 const mergedObj4 = merge2({ name: "Max" }, { hobbies: ["sports"], age: 33 });
 console.log(mergedObj4); // { name: 'Max', hobbies: ["sports"], age: 33 }
 ```
+
+<br/>
 
 ### 인터페이스를 이용한 제약 조건 설정
 
@@ -142,6 +156,9 @@ console.log(countAndDescribe(["sports", "cooking"])); // [["sports", "cooking"],
 // console.log(countAndDescribe(3));
 ```
 
+<br/>
+<br/>
+
 ## 4. keyof Constraint
 
 ### keyof 제약 조건의 필요성
@@ -155,6 +172,8 @@ function extractAndConvert1(obj: object, key: string) {
   return obj[key];
 }
 ```
+
+<br/>
 
 ### keyof 제약 조건 사용하기
 
@@ -175,6 +194,9 @@ function extractAndConvert2<T extends object, U extends keyof T>(
 // 객체에 해당 두 번째 매개변수에 작성한 키가 존재하므로 정상적으로 작동한다.
 console.log(extractAndConvert2({ name: "Max" }, "name")); // 'Max'
 ```
+
+<br/>
+<br/>
 
 ## 5. Generic Classes
 
@@ -229,6 +251,8 @@ objectStorage.removeItem({ name: "Max" });
 console.log(objectStorage.getItems()); // [{ name: 'Max' }]
 ```
 
+<br/>
+
 ### 제약 조건을 설정한 제네릭 클래스
 
 - 특정 타입에만 작동하도록 제약 조건을 설정하였다.
@@ -268,6 +292,9 @@ console.log(storages1.getItems()); // [1, 100]
 // const storages2 = new DataStorage1<object>();
 ```
 
+<br/>
+<br/>
+
 ## 6. Generic Utility Types
 
 ### 1. Partial 타입 : 특정 타입의 부분 집합 타입을 정의할 수 있다.
@@ -303,6 +330,8 @@ function createCourseGoal(
 }
 ```
 
+<br/>
+
 ### 2. Readonly 타입 : 변경 불가능하도록 읽기 전용 데이터로 만들 수 있다.
 
 ```typescript
@@ -312,13 +341,20 @@ const names: Readonly<string[]> = ["Max", "Anna"];
 // names.push("Manu");
 ```
 
+<br/>
+<br/>
+
 ## 7. 제네릭 타입 vs. 유니언 타입
 
 - 아래 두 가지 방식으로 작성된 클래스는 엄연히 다른 동작을 수행한다.
 
+<br/>
+
 ### 제네릭 타입과 유니언 타입의 공통점
 
 - 둘 다 여러 타입을 동시에 다룬다.
+
+<br/>
 
 ### 제네릭 타입을 사용하는 경우
 
@@ -327,9 +363,13 @@ const names: Readonly<string[]> = ["Max", "Anna"];
 - 여러 타입에서 동작하는 함수를 생성하고자 할 때
 - 제네릭을 사용하지 않고 any 타입을 사용하면 여러 타입을 넣을 수 있지만 any는 타입 체크를 하지 않는다. 함수의 인자 타입과 반환 타입을 알 수 없다는 문제를 개선하고자 제네릭 타입을 사용한다.
 
+  <br/>
+
 ### 유니언 타입을 사용하는 경우
 
 - 모든 메서드나 함수 호출마다 다른 타입을 지정하고자 할 때
+
+  <br/>
 
 ### 제네릭 타입으로 작성된 클래스
 
@@ -353,6 +393,8 @@ class DataStorage1<T extends string | number | boolean> {
   }
 }
 ```
+
+<br/>
 
 ### 유니언 타입으로 작성된 클래스
 

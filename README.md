@@ -7,3 +7,4 @@
 |    4    | [Next Generation Javascript and Typescript](https://github.com/dmswl98/understanding-typescript/blob/main/4_next-generation-js-and-ts/README.md) |
 |    5    |              [Classes & Interfaces](https://github.com/dmswl98/understanding-typescript/blob/main/5_class-and-interfaces/README.md)              |
 |    6    |                    [Advanced Types](https://github.com/dmswl98/understanding-typescript/blob/main/6_advanced-types/README.md)                    |
+|    7    |                          [Generics](https://github.com/dmswl98/understanding-typescript/blob/main/7_generics/README.md)                          |
