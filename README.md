@@ -8,3 +8,4 @@
 |    5    |              [Classes & Interfaces](https://github.com/dmswl98/understanding-typescript/blob/main/5_class-and-interfaces/README.md)              |
 |    6    |                    [Advanced Types](https://github.com/dmswl98/understanding-typescript/blob/main/6_advanced-types/README.md)                    |
 |    7    |                          [Generics](https://github.com/dmswl98/understanding-typescript/blob/main/7_generics/README.md)                          |
+|    8    |                        [Decorators](https://github.com/dmswl98/understanding-typescript/blob/main/8_decorators/README.md)                        |
