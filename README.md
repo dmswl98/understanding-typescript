@@ -9,3 +9,5 @@
 |    6    |                    [Advanced Types](https://github.com/dmswl98/understanding-typescript/blob/main/6_advanced-types/README.md)                    |
 |    7    |                          [Generics](https://github.com/dmswl98/understanding-typescript/blob/main/7_generics/README.md)                          |
 |    8    |                        [Decorators](https://github.com/dmswl98/understanding-typescript/blob/main/8_decorators/README.md)                        |
+|    9    |                                                                 Practice Project                                                                 |
+|   10    |            [Modules & Namespaces](https://github.com/dmswl98/understanding-typescript/blob/main/10_modules-and-namespaces/README.md)             |
