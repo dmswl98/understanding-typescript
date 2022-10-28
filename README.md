@@ -12,3 +12,4 @@
 |    9    |                                                                 Practice Project                                                                 |
 |   10    |            [Modules & Namespaces](https://github.com/dmswl98/understanding-typescript/blob/main/10_modules-and-namespaces/README.md)             |
 |   11    |                    [Using Webpack](https://github.com/dmswl98/understanding-typescript/blob/main/11_using-webpack/README.md)                     |
+|   12    |        [Libraries with typescript](https://github.com/dmswl98/understanding-typescript/blob/main/12_libraries-with-typescript/README.md)         |
