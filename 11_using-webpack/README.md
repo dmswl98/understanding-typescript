@@ -155,3 +155,21 @@ module.exports = {
 ```
 
 config 파일 수동 설정하는 방법은 --config 뒤에 config 파일명(파일 확장자 포함)을 작성한다.
+
+## 알아두면 좋은 파일 구조
+
+📁 src</br>
+|---- 📁 components</br>
+|-----|---- base-component.ts</br>
+|-----|---- project-input.ts</br>
+|-----|---- project-item.ts</br>
+|-----|---- project-list.ts</br>
+|---- 📁 decorators</br>
+|-----|---- autobind.ts</br>
+|---- 📁 models</br>
+|-----|---- drag-drop.ts</br>
+|-----|---- project.ts</br>
+|---- 📁 state</br>
+|-----|---- project-state.ts</br>
+|---- 📁 util</br>
+|-----|---- validation.ts</br>
